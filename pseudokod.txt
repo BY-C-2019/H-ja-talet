@@ -1,0 +1,14 @@
+Skapa variabel X för maxvärde (21) och Y för aktuelltvärde
+Instansiera spelare
+Skriv välkomstmeddelande
+Under tiden Y != X
+    Sätt aktuell spelare
+    Kontrollera om Y > X - 3
+        Kontrollera om Y = X - 1
+        OM JA - Skriv ut "Du kan bara välja X. Ta ditt nummer och gå loser".
+                    Skriv ut vinnarmeddelande till spelaren som vann
+                    Avsluta spelet
+        OM NEJ - Skriv ut nummer kvar till 21
+    OM Nej Skriv ut kommande 3 nummer
+    Fråga nuvarande spelare efter hur mycket värdet ska höjas
+        Lägg till värdet i Y
