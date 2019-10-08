@@ -12,8 +12,6 @@ namespace hoja_talet
         static int countForPlayerTurn = 1;
         //variabel för WannaPlayAgain()-metoden
         static bool playAgain = true;
-        //loop används för loopar vid try/catch
-        static bool loop;
         //Metod som sparar ner användarnas namn      
         static string PlayerNames()
         {
@@ -21,37 +19,46 @@ namespace hoja_talet
             string player = Console.ReadLine();
             return player;
         }
-
+        //Själva spelet
         static void PlayTheGame()
         {
             while (number < 21)
             {
-                Console.WriteLine("Väljer du: " + (number + 1) + ", " + (number + 2) + " eller " + (number + 3));
-                Console.Write(KeepTrackOfWhosTurn() + ": ");
-                acceptedNumber = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    Console.WriteLine("Väljer du: " + (number + 1) + ", " + (number + 2) + " eller " + (number + 3));
+                    Console.Write(KeepTrackOfWhosTurn() + ": ");
+                    acceptedNumber = Convert.ToInt32(Console.ReadLine());
 
-                if (acceptedNumber > (number + 3) || acceptedNumber <= number || acceptedNumber > 21)
+                    if (acceptedNumber > (number + 3) || acceptedNumber <= number || acceptedNumber > 21)
+                    {
+                        Console.WriteLine("I detta spelet får man inte fuska! Lägg ner det, det finns ändå inga pengar att vinna.");
+                        Console.ReadLine();
+                    }
+                    else if (acceptedNumber == 21)
+                    {
+                        number = acceptedNumber;
+                        Console.WriteLine(KeepTrackOfWhosTurn() + " har förlorat!\n");
+                        Console.ReadKey();
+                        countForPlayerTurn++;
+                        Console.WriteLine("Grattis till segern " + KeepTrackOfWhosTurn() + "!!!!!!11one");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        countForPlayerTurn++;
+                        number = acceptedNumber;
+                        Console.ReadKey();
+                    }
+                }
+                catch
                 {
-                    Console.WriteLine("I detta spelet får man inte fuska! Lägg ner det, det finns ändå inga pengar att vinna.");
+                    Console.WriteLine("Bara siffror");
                     Console.ReadLine();
-                }
-                else if (acceptedNumber == 21)
-                {
-                    number = acceptedNumber;
-                    Console.WriteLine(KeepTrackOfWhosTurn() + " har förlorat!\n");
-                    Console.ReadKey();
-                    countForPlayerTurn++;
-                    Console.WriteLine("Grattis till segern " + KeepTrackOfWhosTurn() + "!!!!!!11one");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    countForPlayerTurn++;
-                    number = acceptedNumber;
-                    Console.ReadKey();
                 }
             }
         }
+        //Håll koll på om det är spelare 1 eller 2s tur genom att kolla om countForFlayerTurn är jämt eller udda
         static string KeepTrackOfWhosTurn()
         {
             if (countForPlayerTurn % 2 == 0)
@@ -63,6 +70,7 @@ namespace hoja_talet
                 return player1;
             }
         }
+        //Metod ifall man vill spela igen
         static void WannaPlayAgain()
         {
             Console.WriteLine("Vill ni spela igen?");
@@ -75,16 +83,20 @@ namespace hoja_talet
                 Console.WriteLine("Vad tråkigt att ni inte vill fortsätta spela!");
                 Console.WriteLine("Men det är fullt förståeligt...");
             }
-            else if(yesOrNo[0] == 'J')
+            else if (yesOrNo[0] == 'J')
             {
                 number = 0;
                 playAgain = true;
                 Console.WriteLine("Kul att ni vill spela igen!");
             }
+            else
+            {
+                Console.WriteLine("Svara bara [Ja/Nej]");
+            }
         }
 
         static void Main(string[] args)
-        {   
+        {
             Console.WriteLine("||------------------------------------------------------||");
             Console.WriteLine("Välkommen till spelet 21. Nej vi pratar inte om BlackJack. \nDetta spelet är mycket tråkigare. Nej man kan inte vinna några pengar här!");
             Console.WriteLine("Den som tvingas skriva 21 har förlorat!");
