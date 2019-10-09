@@ -11,6 +11,8 @@ namespace hoja_talet
         private bool    isWinner = true;
         public  bool    IsWinner { set { isWinner = value; }}
 
+        private string  chosenNumbers = " | ";
+
         public Player(int playerID)
         {
             this.ID     = playerID;
@@ -27,10 +29,17 @@ namespace hoja_talet
         {  
             if (isWinner) {
                 Console.WriteLine("Vinnare: {0}, GRATTIS!!", name);
+                Console.WriteLine("Du valde följande nummer:");
+                Console.WriteLine(chosenNumbers + "\n");
             }
             // else {
             //     Console.WriteLine("Förlorare: {0} (L2P!)", name);
             // }
+        }
+
+        public void AddChosenNumber(int number)
+        {
+            chosenNumbers += (number + " | ");
         }
 
     }

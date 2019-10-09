@@ -71,7 +71,9 @@ namespace hoja_talet
                     }
                     numbersLeftToMax++;
                 }
-                GetAndControlChosenValue(numbersLeftToMax);
+                // Set new value from userinput
+                currentValue = GetAndControlChosenValue(numbersLeftToMax);
+                players[currentPlayer].AddChosenNumber(currentValue);
 
                 turnCounter++;
             }
@@ -89,9 +91,8 @@ namespace hoja_talet
             {
                 players[i].PrintEndMessage();
             }
-
         }
-        private void GetAndControlChosenValue(int numbersLeftToMax)
+        private int GetAndControlChosenValue(int numbersLeftToMax)
         {
             while (true)
             {
@@ -110,9 +111,8 @@ namespace hoja_talet
                     continue;
                 }
                 
-                // Set current value to input
-                currentValue = input;
-                return;
+                // Return input value
+                return input;
             }
         }
 
