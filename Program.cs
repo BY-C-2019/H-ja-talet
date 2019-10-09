@@ -6,7 +6,8 @@ namespace hoja_talet
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
+            HigherNumberGame game = new HigherNumberGame(2, 3, 21);
+            game.StartGame();
+        }   
     }
 }
